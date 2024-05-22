@@ -1,0 +1,87 @@
+1. buat database dengan nama "myshop"
+
+CREATE DATABASE myshop;
+
+2. Membuat Table di Dalam Database
+
+USE myshop;
+
+-tabel "users"
+CREATE TABLE users (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    password VARCHAR(255)
+);
+
+-tabel "categories"
+CREATE TABLE categories (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+-tabel "items"
+CREATE TABLE items (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    description VARCHAR(255)
+);
+
+3. Memasukkan Data pada Table
+
+-insert table "users"
+INSERT INTO users (name, email, password) VALUES
+('Joyful Roma Umboh', 'joyfulromeumboh@gmail.com', 'joy123'),
+('Jane Doe', 'jane@doe.com', 'jenita123');
+
+-insert table "categories"
+INSERT INTO categories (name) VALUES
+('gadget'),
+('cloth'),
+('men'),
+('women'),
+('branded');
+
+-insert into table "items"
+
+ALTER TABLE items
+ADD COLUMN price DECIMAL(10, 2),
+ADD COLUMN stock INTEGER,
+ADD COLUMN category_id INTEGER;
+
+- Masukkan data ke dalam tabel "items"
+INSERT INTO items (name, description, price, stock, category_id) VALUES
+('Sumsang b50', 'hape keren dari merek sumsang', 4000000, 100, 1),
+('Uniklooh', 'baju keren dari brand ternama', 500000, 50, 2),
+('IMHO Watch', 'jam tangan anak yang jujur banget', 2000000, 10, 1);
+
+4. Mengambil Data dari Database
+
+a.SELECT id, name, email
+FROM users;
+
+b.Mengambil data items
+-data item pada table items yang memiliki harga di atas 1000000 (satu juta).
+
+SELECT *
+FROM items
+WHERE price > 1000000;
+
+-data item pada table items yang memiliki name serupa atau mirip (like) dengan kata kunci “uniklo”, “watch”, atau “sang” (pilih salah satu saja)
+
+SELECT *
+FROM items
+WHERE name LIKE '%uniklo%';
+
+c. Menampilkan data items join dengan kategori
+
+SELECT items.id, items.name, items.description, items.price, items.stock, categories.name AS category_name
+FROM items
+JOIN categories ON items.category_id = categories.id;
+
+5. Mengubah Data dari Database
+
+UPDATE items
+SET price = 2500000
+WHERE name = 'Sumsang b50';
+
